@@ -60,7 +60,11 @@ module Layercake
         end
       end
       
-      value
+      if value
+        value.is_a?(ActiveSupport::Cache::Entry) ? value : ActiveSupport::Cache::Entry.new(value)
+      else
+        nil
+      end
     end
     
     def write_entry(key, entry, options)
